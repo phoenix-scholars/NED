@@ -1,0 +1,60 @@
+
+\chapter{دیباچه}
+% 1.  Introduction
+
+%    XDR is a standard for the description and encoding of data.  It is
+%    useful for transferring data between different computer
+%    architectures, and it has been used to communicate data between such
+%    diverse machines as the SUN WORKSTATION*, VAX*, IBM-PC*, and Cray*.
+%    XDR fits into the ISO presentation layer and is roughly analogous in
+%    purpose to X.409, ISO Abstract Syntax Notation.  The major difference
+%    between these two is that XDR uses implicit typing, while X.409 uses
+%    explicit typing.
+
+ند یک استاندارد برای توصیف روش‌های کدگذاری است که در سیستم‌های پردازشی مورد
+استفاده قرار می‌گیرد.
+ند برای انتقال داده‌ها در شبکه‌های رایانه‌ای و یا سخت‌افزارها، که در آنها معماری
+نهادهای موجود در ارتباط با یکدیگر متفاوت است بسیار کاربرد دارد.
+برای نمونه حالتی تصور کنید که در آن رایانه‌ای شخصی با استفاده از گذرگاه‌های
+\lr{PCI} با یک ریزپردازنده در ارتباط است. 
+بدیهی است که معماری این درو پردازنده با یکدیگر متفاوت است و استفاده از ساختارهای
+داده عمومی نمی‌تواند در ارتباط بین آنها کاربرد داشته باشد.
+ند استانداردی است که کدگذاری این نوع ارتباط را تعریف می‌کند.
+استاندارد ند مشابه با استانداردهای \lr{XDR}\cite{srinivasan1995xdr} و \lr{X.409}\cite{x409}
+است.
+\lr{X.409} که در لایه نمایش پشته پرتوکلی \lr{ISO} کاربرد دارد، انواع داده را به
+صورت صریح بیان می‌کند.
+این درحالی است که استاندارد \lr{XDR} انواع داده را به صورت مجازی تعریف می‌کند و
+در استانداردهای متفاوت مانند \lr{IEE1609} به کار گرفته شده است.
+استاندارد ند نیز مانند استاندارد \lr{XDR} داده‌ها را به صورت مجازی نمایش می‌دهد
+با این تفاوت که مدل نمایش فیزیکی داده در این استاندارد به ساختارهای فیزیکی و
+پردازنده‌ها نزدیکتر است.
+
+%    XDR uses a language to describe data formats.  The language can be
+%    used only to describe data; it is not a programming language.  This
+%    language allows one to describe intricate data formats in a concise
+%    manner.  The alternative of using graphical representations (itself
+%    an informal language) quickly becomes incomprehensible when faced
+%    with complexity.  The XDR language itself is similar to the C
+%    language [KERN], just as Courier [COUR] is similar to Mesa.
+%    Protocols such as ONC RPC (Remote Procedure Call) and the NFS*
+%    (Network File System) use XDR to describe the format of their data.
+
+ند در حقیقت زبانی است که برای توصیف ساختارهای داده‌ای به کار گرفته می‌شود. این
+زبان تنها برای توصیف داده به کار گرفته می‌شود و نمی‌توان آن را به عنوان یک زبان
+برنامه سازی در نظر گرفت.
+استفاده از زبان‌های گرافیکی برای نمایش داده‌ها، در قراردادها و ارتباط‌های فیزیکی
+نارسایی‌های زیادی دارد.
+برای نمونه در این نوع زبان‌ها نحوه قرار گرفتن داده‌ها به صورت یک جریان بیتی مشخص
+نیست.
+زبان ند بسیار شبیه به زبان برنامه سازی \lr{C} است با این تفاوت که ساختارهای
+داده‌ای خاصی را توسعه داده و اصول یکتایی برای تبدیل این ساختارهای به رشته بیت را
+مشخص کرده است.
+این زبان در کاربردهایی مانند، قراردادهای شبکه، فراخوانی دور روال‌ها، انتقال داده
+بین دستگاه‌های سخت افزاری و محاسبات توزیعی کابرد فراوان دارد.
+
+\input{introduction/assum}
+\input{introduction/history}
+
+
+

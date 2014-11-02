@@ -1,0 +1,58 @@
+
+% 4.  Data Types
+\chapter{نوع داده‌}
+
+%    Each of the sections that follow describes a data type defined in the
+%    XDR standard, shows how it is declared in the language, and includes
+%    a graphic illustration of its encoding.
+
+در این بخش انواع داده‌های از پیش تعریف شده در استاندارد ند تشریح شده است.
+هر ساختار داده با استفاده از شکل گرافیکی تشریح شده است که بیانگر نحوه ذخیره سازی
+آن در جریان داده است.
+ 
+%    For each data type in the language we show a general paradigm
+%    declaration.  Note that angle brackets (< and >) denote variable-
+%    length sequences of data and that square brackets ([ and ]) denote
+%    fixed-length sequences of data.  "n", "m", and "r" denote integers.
+%    For the full language specification and more formal definitions of
+%    terms such as "identifier" and "declaration", refer to Section 6,
+%    "The XDR Language Specification".
+%
+%    For some data types, more specific examples are included.  A more
+%    extensive example of a data description is in Section 7, "An Example
+%    of an XDR Data Description".
+
+
+\input{data-types/void}
+\input{data-types/byte}
+\input{data-types/integer}
+\input{data-types/unsigned-integer}
+\input{data-types/enumeration}
+\input{data-types/boolean}
+\input{data-types/long-integer}
+\input{data-types/unsigned-long-integer}
+\input{data-types/float}
+\input{data-types/double}
+\input{data-types/quadruple}
+\input{data-types/constant}
+
+
+
+% 4.20.  Areas for Future Enhancement
+% 
+%    The XDR standard lacks representations for bit fields and bitmaps,
+%    since the standard is based on bytes.  Also missing are packed (or
+%    binary-coded) decimals.
+% 
+%    The intent of the XDR standard was not to describe every kind of data
+%    that people have ever sent or will ever want to send from machine to
+%    machine.  Rather, it only describes the most commonly used data-types
+%    of high-level languages such as Pascal or C so that applications
+%    written in these languages will be able to communicate easily over
+%    some medium.
+% 
+%    One could imagine extensions to XDR that would let it describe almost
+%    any existing protocol, such as TCP.  The minimum necessary for this
+%    is support for different block sizes and byte-orders.  The XDR
+%    discussed here could then be considered the 4-byte big-endian member
+%    of a larger XDR family.

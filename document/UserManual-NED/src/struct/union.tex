@@ -1,0 +1,91 @@
+
+% Discriminated Union
+\section{\glspl*{discriminated union}}
+
+%    A discriminated union is a type composed of a discriminant followed
+%    by a type selected from a set of prearranged types according to the
+%    value of the discriminant.  The type of discriminant is either "int",
+%    "unsigned int", or an enumerated type, such as "bool".  The component
+%    types are called "arms" of the union and are preceded by the value of
+%    the discriminant that implies their encoding.  Discriminated unions
+%    are declared as follows:
+% 
+
+\glspl{discriminated union} یک نوع داده مرکب است که تنها یکی از بخش‌های آن با
+معنی است.
+به بیان دیگر، تنها یک بخش از تمام بخش‌های این داده مرکب را می‌توان در واحد زمان
+تفسیر کرد و به کار برد.
+از این رو نیاز است که همواره یک داده برای تعیین بخش با معنی آن در نظر گرفت. این
+داده را انتخابگر می‌گوییم.
+انتخابگر می‌تواند از انواع داده‌ای زیر باشد:
+\begin{itemize}
+  \item دودویی
+  \item بایت
+  \item صحیح
+  \item صحیح بدون علامت
+  \item شمارنده
+\end{itemize}
+
+هر بخش داده‌ای در این نوع ساختار داده‌ای را بازو می‌نامیم. هر بازو با استفاده از
+یک مقدار مشخص از انتخابگر، با دیگر بازوها متمایز می‌شود.
+ساختار کلی یک \glspl{discriminated union} به صورت زیر است:
+
+\begin{C++}
+ union switch (discriminant-declaration) { 
+	 case discriminant-value-A:
+	    arm-declaration-A;
+	 case discriminant-value-B:
+	    arm-declaration-B;
+	 ...
+	 default: 
+	 	default-declaration;
+ } identifier;
+ \end{C++}
+ 
+
+%    Each "case" keyword is followed by a legal value of the discriminant.
+%    The default arm is optional.  If it is not specified, then a valid
+%    encoding of the union cannot take on unspecified discriminant values.
+%    The size of the implied arm is always a multiple of four bytes.
+
+به دنبال هر عبارت \lr{case} یک مقدار خاص از انتخابگر آورده می‌شود و بعد از آن
+بازو به صورت کامل تعریف می‌شود.
+این ترکیب به این معنی است که اگر انتخابگر مقدار مورد نظر را داشته باش، بازوی
+معادل باید به عنوان ساختار داده‌ای تفسیر و به کار برده شود.
+
+یک عبارت کلیدی دیگر به نام \lr{default} در نظر گرفته شده است. اگر مقدار انتخابگر
+هیچ یک از مقدارهای مجاز تعریف شده در ساختار داده نباشد، بازوی معرفی شده با این
+عبارت به عنوان ساختار داده‌ای در نظر گرفته می‌شود.
+به بیان دیگر این عبارت بازوی پیش فرض را برای این ساختار داده‌ای تعیین می‌کند.
+
+\begin{warning}
+اگر بازوی پیش‌فرضی برای ساختار داده‌ای تعریف نشده باشد، انتخابگر نمی‌تواند
+مقادیر غیر مجاز و یا مقادیر تعریف نشده در ساختار داده‌ای را داشته باشد.
+\end{warning}
+
+
+%    The discriminated union is encoded as its discriminant followed by
+%    the encoding of the implied arm.
+
+کدگذاری \glspl{discriminated union} به صورتی که در شکل \ref{image/struct/union} نمایش
+داده شده است انجام می‌شود.
+
+%            0   1   2   3
+%          +---+---+---+---+---+---+---+---+
+%          |  discriminant |  implied arm  |          DISCRIMINATED UNION
+%          +---+---+---+---+---+---+---+---+
+%          |<---4 bytes--->|
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{image/struct/union}
+\caption[کدگذاری یک \glspl*{discriminated union}]{
+	بایت‌های اولیه این ساختار به انتخابگر اختصاص داده می‌شود که بر اساس نوع آن
+	تعداد بایت متفاوت دارد. حافظه بعد از آن بر اساس نوع بازو تعیین می‌شود.
+}
+\label{image/struct/union}
+\end{figure}
+
+
+
+

@@ -1,0 +1,60 @@
+
+% 8.  Security Considerations
+\chapter{امنیت و ملاحظات آن}
+% 
+%    XDR is a data description language, not a protocol, and hence it does
+%    not inherently give rise to any particular security considerations.
+%    Protocols that carry XDR-formatted data, such as NFSv4, are
+%    responsible for providing any necessary security services to secure
+%    the data they transport.
+% 
+%    Care must be take to properly encode and decode data to avoid
+%    attacks.  Known and avoidable risks include:
+% 
+%    *    Buffer overflow attacks.  Where feasible, protocols should be
+%         defined with explicit limits (via the "<" [ value ] ">" notation
+%         instead of "<" ">") on elements with variable-length data types.
+%         Regardless of the feasibility of an explicit limit on the
+%         variable length of an element of a given protocol, decoders need
+%         to ensure the incoming size does not exceed the length of any
+%         provisioned receiver buffers.
+% 
+%    *    Nul octets embedded in an encoded value of type string.  If the
+%         decoder's native string format uses nul-terminated strings, then
+%         the apparent size of the decoded object will be less than the
+%         amount of memory allocated for the string.  Some memory
+%         deallocation interfaces take a size argument.  The caller of the
+%         deallocation interface would likely determine the size of the
+%         string by counting to the location of the nul octet and adding
+%         one.  This discrepancy can cause memory leakage (because less
+%         memory is actually returned to the free pool than allocated),
+%         leading to system failure and a denial of service attack.
+% 
+%    *    Decoding of characters in strings that are legal ASCII
+%         characters but nonetheless are illegal for the intended
+%         application.  For example, some operating systems treat the '/'
+%         character as a component separator in path names.  For a
+%         protocol that encodes a string in the argument to a file
+%         creation operation, the decoder needs to ensure that '/' is not
+%         inside the component name.  Otherwise, a file with an illegal
+%         '/' in its name will be created, making it difficult to remove,
+%         and is therefore a denial of service attack.
+% 
+%    *    Denial of service caused by recursive decoder or encoder
+%         subroutines.  A recursive decoder or encoder might process data
+%         that has a structured type with a member of type optional data
+%         that directly or indirectly refers to the structured type (i.e.,
+%         a linked list).  For example,
+% 
+%               struct m {
+%                 int x;
+%                 struct m *next;
+%               };
+% 
+%         An encoder or decoder subroutine might be written to recursively
+%         call itself each time another element of type "struct m" is
+%         found.  An attacker could construct a long linked list of
+%         "struct m" elements in the request or response, which then
+%         causes a stack overflow on the decoder or encoder.  Decoders and
+%         encoders should be written non-recursively or impose a limit on
+%         list length.

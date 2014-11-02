@@ -1,0 +1,48 @@
+\chapter{مبانی}
+
+% 3.  Basic Block Size
+% 
+%    The representation of all items requires a multiple of four bytes (or
+%    32 bits) of data.  The bytes are numbered 0 through n-1.  The bytes
+%    are read or written to some byte stream such that byte m always
+%    precedes byte m+1.  If the n bytes needed to contain the data are not
+%    a multiple of four, then the n bytes are followed by enough (0 to 3)
+%    residual zero bytes, r, to make the total byte count a multiple of 4.
+
+تمام داده‌ها با استفاده از یک جریان بایتی نمایش داده می‌شود که شامل ضریبی از ۴
+بایت است.
+تمام بایت‌ها با استفاده از یک اندیس شماره گزاری می‌شود که از شماره $0$ تا $n-1$
+است.
+این نحوه شماره گزاری بیانگر این مطلب است که همواره بایت اول کم ارزش‌ترین بایت
+و بایت انتهای با ارزش ترین بایت است.
+هر زمان تعداد بایت‌های مورد نیاز برای نمایش داده مضربی از عدد چهار باشد، تعدادی
+بایت با مقدارد صفر به انتهای آن اضافه می‌شود.
+ 
+%    We include the familiar graphic box notation for illustration and
+%    comparison.  In most illustrations, each box (delimited by a plus
+%    sign at the 4 corners and vertical bars and dashes) depicts a byte.
+%    Ellipses (...) between boxes show zero or more additional bytes where
+%    required.
+
+برای اینکه درک صحیح از نمایش جریان داده به وجود آید و همچنین مقایسه و درک
+ساختارهای داده‌ایجاد شده راحتر باشد، از نمایش گرافیکی برای جریان داده‌ها استفاده
+می‌شود.
+در این نمایش داده‌های هر جعبه بیانگر یک بایت داده است،  و نقطه چین بین جعبه‌ها
+بیانگر این مطلب است که تعدادی محدود بایت در این فضا قرار گرفته اشت.
+در شکل \ref{image/basics/stream} یک نمونه نمایش گرافیکی داده آورده شده است.
+
+%         +--------+--------+...+--------+--------+...+--------+
+%         | byte 0 | byte 1 |...|byte n-1|    0   |...|    0   |   BLOCK
+%         +--------+--------+...+--------+--------+...+--------+
+%         |<-----------n bytes---------->|<------r bytes------>|
+%         |<-----------n+r (where (n+r) mod 4 = 0)>----------->|
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{image/basics/stream}
+\caption[ساختار یک جریان داده]{
+	جریان داده برای نمایش ساختارهای داده‌ای شامل تعدادی بایت می‌شود که اولین بایت
+	کم ارزش‌ترین بایت در نظر گرفته می‌شود.
+}
+\label{image/basics/stream}
+\end{figure}

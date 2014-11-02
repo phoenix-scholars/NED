@@ -1,0 +1,112 @@
+
+\chapter{ساختارهای داده پیشرفته}
+
+
+\section{تعرف نوع داده}
+
+%    "typedef" does not declare any data either, but serves to define new
+%    identifiers for declaring data.  The syntax is:
+% 
+%          typedef declaration;
+% 
+%    The new type name is actually the variable name in the declaration
+%    part of the typedef.  For example, the following defines a new type
+%    called "eggbox" using an existing type called "egg":
+% 
+%          typedef egg eggbox[DOZEN];
+% 
+%    Variables declared using the new type name have the same type as the
+%    new type name would have in the typedef, if it were considered a
+%    variable.  For example, the following two declarations are equivalent
+%    in declaring the variable "fresheggs":
+% 
+%          eggbox  fresheggs; egg     fresheggs[DOZEN];
+% 
+%    When a typedef involves a struct, enum, or union definition, there is
+%    another (preferred) syntax that may be used to define the same type.
+%    In general, a typedef of the following form:
+% 
+%          typedef <<struct, union, or enum definition>> identifier;
+% 
+%    may be converted to the alternative form by removing the "typedef"
+%    part and placing the identifier after the "struct", "union", or
+%    "enum" keyword, instead of at the end.  For example, here are the two
+%    ways to define the type "bool":
+% 
+%          typedef enum {    /* using typedef */
+%             FALSE = 0,
+%             TRUE = 1
+%          } bool;
+% 
+%          enum bool {       /* preferred alternative */
+%             FALSE = 0,
+%             TRUE = 1
+%          };
+% 
+%    This syntax is preferred because one does not have to wait until the
+%    end of a declaration to figure out the name of the new type.
+
+% 4.19.  Optional-Data
+\section{داده اختیاری}
+
+%    Optional-data is one kind of union that occurs so frequently that we
+%    give it a special syntax of its own for declaring it.  It is declared
+%    as follows:
+% 
+%          type-name *identifier;
+% 
+%    This is equivalent to the following union:
+% 
+%          union switch (bool opted) {
+%          case TRUE:
+%             type-name element;
+%          case FALSE:
+%             void;
+%          } identifier;
+
+%    It is also equivalent to the following variable-length array
+%    declaration, since the boolean "opted" can be interpreted as the
+%    length of the array:
+% 
+%          type-name identifier<1>;
+% 
+%    Optional-data is not so interesting in itself, but it is very useful
+%    for describing recursive data-structures such as linked-lists and
+%    trees.  For example, the following defines a type "stringlist" that
+%    encodes lists of zero or more arbitrary length strings:
+% 
+%         struct stringentry {
+%            string item<>;
+%            stringentry *next;
+%         };
+% 
+%         typedef stringentry *stringlist;
+% 
+%    It could have been equivalently declared as the following union:
+% 
+%          union stringlist switch (bool opted) {
+%          case TRUE:
+%             struct {
+%                string item<>;
+%                stringlist next;
+%             } element;
+%          case FALSE:
+%             void;
+%          };
+% 
+%    or as a variable-length array:
+% 
+%         struct stringentry {
+%            string item<>;
+%            stringentry next<1>;
+%         };
+% 
+%         typedef stringentry stringlist<1>;
+% 
+%    Both of these declarations obscure the intention of the stringlist
+%    type, so the optional-data declaration is preferred over both of
+%    them.  The optional-data type also has a close correlation to how
+%    recursive data structures are represented in high-level languages
+%    such as Pascal or C by use of pointers.  In fact, the syntax is the
+%    same as that of the C language for pointers.
+% 

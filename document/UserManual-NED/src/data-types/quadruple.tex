@@ -1,0 +1,51 @@
+
+% 4.8.  Quadruple-Precision Floating-Point
+\section{ممیز شناور چهارلا}
+% 
+%    The standard defines the encoding for the quadruple-precision
+%    floating-point data type "quadruple" (128 bits or 16 bytes).  The
+%    encoding used is designed to be a simple analog of the encoding used
+%    for single- and double-precision floating-point numbers using one
+%    form of IEEE double extended precision.  The standard encodes the
+%    following three fields, which describe the quadruple-precision
+%    floating-point number:
+% 
+%       S: The sign of the number.  Values 0 and 1 represent positive and
+%          negative, respectively.  One bit.
+% 
+%       E: The exponent of the number, base 2.  15 bits are devoted to
+%          this field.  The exponent is biased by 16383.
+% 
+%       F: The fractional part of the number's mantissa, base 2.  112 bits
+%          are devoted to this field.
+% 
+%    Therefore, the floating-point number is described by:
+% 
+%          (-1)**S * 2**(E-Bias) * 1.F
+% 
+%    It is declared as follows:
+% 
+%          quadruple identifier;
+% 
+%          +------+------+------+------+------+------+-...--+------+
+%          |byte 0|byte 1|byte 2|byte 3|byte 4|byte 5| ...  |byte15|
+%          S|    E       |                  F                      |
+%          +------+------+------+------+------+------+-...--+------+
+%          1|<----15---->|<-------------112 bits------------------>|
+%          <-----------------------128 bits------------------------>
+%                                       QUADRUPLE-PRECISION FLOATING-POINT
+% 
+%    Just as the most and least significant bytes of a number are 0 and 3,
+%    the most and least significant bits of a quadruple-precision
+%    floating-point number are 0 and 127.  The beginning bit (and most
+%    significant bit) offsets of S, E , and F are 0, 1, and 16,
+%    respectively.  Note that these numbers refer to the mathematical
+%    positions of the bits, and NOT to their actual physical locations
+%    (which vary from medium to medium).
+
+%    The encoding for signed zero, signed infinity (overflow), and
+%    denormalized numbers are analogs of the corresponding encodings for
+%    single and double-precision floating-point numbers [SPAR], [HPRE].
+%    The "NaN" encoding as it applies to quadruple-precision floating-
+%    point numbers is system dependent and should not be interpreted
+%    within XDR as anything other than "NaN".

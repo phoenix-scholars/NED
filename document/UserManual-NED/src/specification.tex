@@ -1,0 +1,157 @@
+
+% 6.  The XDR Language Specification
+\chapter{فنی}
+
+% 6.1.  Notational Conventions
+% 
+%    This specification uses an extended Back-Naur Form notation for
+%    describing the XDR language.  Here is a brief description of the
+%    notation:
+% 
+%    (1) The characters '|', '(', ')', '[', ']', '"', and '*' are special.
+%    (2) Terminal symbols are strings of any characters surrounded by
+%    double quotes.  (3) Non-terminal symbols are strings of non-special
+%    characters.  (4) Alternative items are separated by a vertical bar
+%    ("|").  (5) Optional items are enclosed in brackets.  (6) Items are
+%    grouped together by enclosing them in parentheses.  (7) A '*'
+%    following an item means 0 or more occurrences of that item.
+% 
+%    For example, consider the following pattern:
+% 
+%          "a " "very" (", " "very")* [" cold " "and "]  " rainy "
+%          ("day" | "night")
+% 
+%    An infinite number of strings match this pattern.  A few of them are:
+% 
+%          "a very rainy day"
+%          "a very, very rainy day"
+%          "a very cold and  rainy day"
+%          "a very, very, very cold and  rainy night"
+% 
+% 6.2.  Lexical Notes
+% 
+%    (1) Comments begin with '/*' and terminate with '*/'.  (2) White
+%    space serves to separate items and is otherwise ignored.  (3) An
+%    identifier is a letter followed by an optional sequence of letters,
+%    digits, or underbar ('\_').  The case of identifiers is not ignored.
+%    (4) A decimal constant expresses a number in base 10 and is a
+%    sequence of one or more decimal digits, where the first digit is not
+%    a zero, and is optionally preceded by a minus-sign ('-').  (5) A
+%    hexadecimal constant expresses a number in base 16, and must be
+%    preceded by '0x', followed by one or hexadecimal digits ('A', 'B',
+%    'C', 'D', E', 'F', 'a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3',
+%    '4', '5', '6', '7', '8', '9').  (6) An octal constant expresses a
+%    number in base 8, always leads with digit 0, and is a sequence of one
+%    or more octal digits ('0', '1', '2', '3', '4', '5', '6', '7').
+% 
+% 6.3.  Syntax Information
+% 
+%       declaration:
+%            type-specifier identifier
+%          | type-specifier identifier "[" value "]"
+%          | type-specifier identifier "<" [ value ] ">"
+%          | "opaque" identifier "[" value "]"
+%          | "opaque" identifier "<" [ value ] ">"
+%          | "string" identifier "<" [ value ] ">"
+%          | type-specifier "*" identifier
+%          | "void"
+% 
+%       value:
+%            constant
+%          | identifier
+% 
+%       constant:
+%          decimal-constant | hexadecimal-constant | octal-constant
+% 
+%       type-specifier:
+%            [ "unsigned" ] "int"
+%          | [ "unsigned" ] "hyper"
+%          | "float"
+%          | "double"
+%          | "quadruple"
+%          | "bool"
+%          | enum-type-spec
+%          | struct-type-spec
+%          | union-type-spec
+%          | identifier
+% 
+%       enum-type-spec:
+%          "enum" enum-body
+% 
+%       enum-body:
+%          "{"
+%             ( identifier "=" value )
+%             ( "," identifier "=" value )*
+%          "}"
+% 
+%       struct-type-spec:
+%          "struct" struct-body
+% 
+%       struct-body:
+%          "{"
+%             ( declaration ";" )
+%             ( declaration ";" )*
+%          "}"
+% 
+%       union-type-spec:
+%          "union" union-body
+% 
+%       union-body:
+%          "switch" "(" declaration ")" "{"
+%             case-spec
+%             case-spec *
+%             [ "default" ":" declaration ";" ]
+%          "}"
+% 
+%       case-spec:
+%         ( "case" value ":")
+%         ( "case" value ":") *
+%         declaration ";"
+% 
+%       constant-def:
+%          "const" identifier "=" constant ";"
+% 
+%       type-def:
+%            "typedef" declaration ";"
+%          | "enum" identifier enum-body ";"
+%          | "struct" identifier struct-body ";"
+%          | "union" identifier union-body ";"
+% 
+%       definition:
+%            type-def
+%          | constant-def
+% 
+%       specification:
+%            definition *
+% 
+% 6.4.  Syntax Notes
+% 
+%    (1) The following are keywords and cannot be used as identifiers:
+%    "bool", "case", "const", "default", "double", "quadruple", "enum",
+%    "float", "hyper", "int", "opaque", "string", "struct", "switch",
+%    "typedef", "union", "unsigned", and "void".
+% 
+%    (2) Only unsigned constants may be used as size specifications for
+%    arrays.  If an identifier is used, it must have been declared
+%    previously as an unsigned constant in a "const" definition.
+% 
+%    (3) Constant and type identifiers within the scope of a specification
+%    are in the same name space and must be declared uniquely within this
+%    scope.
+% 
+%    (4) Similarly, variable names must be unique within the scope of
+%    struct and union declarations.  Nested struct and union declarations
+%    create new scopes.
+% 
+%    (5) The discriminant of a union must be of a type that evaluates to
+%    an integer.  That is, "int", "unsigned int", "bool", an enumerated
+%    type, or any typedefed type that evaluates to one of these is legal.
+%    Also, the case values must be one of the legal values of the
+%    discriminant.  Finally, a case value may not be specified more than
+%    once within the scope of a union declaration.
+
+
+
+
+
+

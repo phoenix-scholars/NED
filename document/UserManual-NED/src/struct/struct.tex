@@ -1,0 +1,42 @@
+
+% 4.14.  Structure
+\section{ساختار}
+
+%    The components of the structure are encoded in the order of their
+%    declaration in the structure.  Each component's size is a multiple of
+%    four bytes, though the components may be different sizes.
+یک گردایه با معنی از داده‌ها به عنوان یک ساختار داده‌ای در نظر گرفته می‌شود.
+در حالت کلی یک ساختار داده به صورت زیر تعریف می‌شود:
+
+\begin{C++}
+ struct {
+    component-declaration-A;
+    component-declaration-B;
+    ...
+ } identifier;
+\end{C++}
+
+تمام اجزای تشکیل دهنده یک ساختار داده‌ای بر اساس ترتیب تعریف شدن انها در ساختار
+داده‌ای، کدگذاری می‌شوند.
+اندازه هر بخش از ساختار داده‌ای می‌تواند متفاوت باشد، برای نمونه یک بایت داده به
+همراه یک عدد صیحیح بدون علامت می‌تواند در این ساختار به کار گرفته شود.
+در شکل \ref{image/struct/structuer} نحوه کدگذاری یک ساختار داده نمایش داده شده
+است.
+
+% 
+%          +-------------+-------------+...
+%          | component A | component B |...                      STRUCTURE
+%          +-------------+-------------+...
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{image/struct/structuer}
+\caption[کدگذاری یک ساختار داده]{
+	کدگذاری یک ساختار داده. هر بخش از یک ساختار داده به صورت مستقل کدگذاری شده و در
+	نهایت کدگذاری‌های ایجاد شده بر اساس ترتیب تعریف هر بخش در یک کدگذاری جدید ترکیب
+	می‌شود.
+}
+\label{image/struct/structuer}
+\end{figure}
+
+

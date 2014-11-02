@@ -1,0 +1,31 @@
+% 4.2.  Unsigned Integer
+\section{عدد صحیح بدون علامت}
+
+%    An XDR unsigned integer is a 32-bit datum that encodes a non-negative
+%    integer in the range [0,4294967295].  It is represented by an
+%    unsigned binary number whose most and least significant bytes are 0
+%    and 3, respectively.  An unsigned integer is declared as follows:
+% 
+%          unsigned int identifier;
+% 
+%            (MSB)                   (LSB)
+%             +-------+-------+-------+-------+
+%             |byte 0 |byte 1 |byte 2 |byte 3 |           UNSIGNED INTEGER
+%             +-------+-------+-------+-------+
+%             <------------32 bits------------>
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{image/data-types/unsigned-integer}
+\caption[ساختار یک داده صحیح بدون علامت]{
+	ساختار داده‌ای یک داده صحیح بدون علامت شامل ۴ بایت است. در این ساختار بایت صفر
+	کم ارزش‌ترین و بایت ۳ پر ارزش‌ترین بایت است.
+}
+\label{image/data-types/unsigned-integer}
+\end{figure}
+
+
+
+
+

@@ -1,0 +1,66 @@
+
+% 5.  Discussion
+\chapter{نتیجه گیری}
+
+%    (1) Why use a language for describing data?  What's wrong with
+%        diagrams?
+% 
+%    There are many advantages in using a data-description language such
+%    as XDR versus using diagrams.  Languages are more formal than
+%    diagrams and lead to less ambiguous descriptions of data.  Languages
+%    are also easier to understand and allow one to think of other issues
+%    instead of the low-level details of bit encoding.  Also, there is a
+%    close analogy between the types of XDR and a high-level language such
+%    as C or Pascal.  This makes the implementation of XDR encoding and
+%    decoding modules an easier task.  Finally, the language specification
+%    itself is an ASCII string that can be passed from machine to machine
+%    to perform on-the-fly data interpretation.
+% 
+%    (2) Why is there only one byte-order for an XDR unit?
+% 
+%    Supporting two byte-orderings requires a higher-level protocol for
+%    determining in which byte-order the data is encoded.  Since XDR is
+%    not a protocol, this can't be done.  The advantage of this, though,
+%    is that data in XDR format can be written to a magnetic tape, for
+%    example, and any machine will be able to interpret it, since no
+%    higher-level protocol is necessary for determining the byte-order.
+% 
+%    (3) Why is the XDR byte-order big-endian instead of little-endian?
+%        Isn't this unfair to little-endian machines such as the VAX(r),
+%        which has to convert from one form to the other?
+% 
+%    Yes, it is unfair, but having only one byte-order means you have to
+%    be unfair to somebody.  Many architectures, such as the Motorola
+%    68000* and IBM 370*, support the big-endian byte-order.
+% 
+%    (4) Why is the XDR unit four bytes wide?
+% 
+%    There is a tradeoff in choosing the XDR unit size.  Choosing a small
+%    size, such as two, makes the encoded data small, but causes alignment
+%    problems for machines that aren't aligned on these boundaries.  A
+%    large size, such as eight, means the data will be aligned on
+%    virtually every machine, but causes the encoded data to grow too big.
+%    We chose four as a compromise.  Four is big enough to support most
+%    architectures efficiently, except for rare machines such as the
+%    eight-byte-aligned Cray*.  Four is also small enough to keep the
+%    encoded data restricted to a reasonable size.
+% 
+%    (5) Why must variable-length data be padded with zeros?
+% 
+%    It is desirable that the same data encode into the same thing on all
+%    machines, so that encoded data can be meaningfully compared or
+%    checksummed.  Forcing the padded bytes to be zero ensures this.
+% 
+%    (6) Why is there no explicit data-typing?
+% 
+%    Data-typing has a relatively high cost for what small advantages it
+%    may have.  One cost is the expansion of data due to the inserted type
+%    fields.  Another is the added cost of interpreting these type fields
+%    and acting accordingly.  And most protocols already know what type
+%    they expect, so data-typing supplies only redundant information.
+%    However, one can still get the benefits of data-typing using XDR.
+%    One way is to encode two things: first, a string that is the XDR data
+%    description of the encoded data, and then the encoded data itself.
+%    Another way is to assign a value to all the types in XDR, and then
+%    define a universal type that takes this value as its discriminant and
+%    for each value, describes the corresponding data type.

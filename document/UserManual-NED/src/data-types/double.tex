@@ -1,0 +1,48 @@
+
+% 4.7.  Double-Precision Floating-Point
+\section{ممیز شناور دوبل}
+
+%    The standard defines the encoding for the double-precision floating-
+%    point data type "double" (64 bits or 8 bytes).  The encoding used is
+%    the IEEE standard for normalized double-precision floating-point
+%    numbers [IEEE].  The standard encodes the following three fields,
+%    which describe the double-precision floating-point number:
+% 
+%       S: The sign of the number.  Values 0 and 1 represent positive and
+%             negative, respectively.  One bit.
+% 
+%       E: The exponent of the number, base 2.  11 bits are devoted to
+%             this field.  The exponent is biased by 1023.
+% 
+%       F: The fractional part of the number's mantissa, base 2.  52 bits
+%             are devoted to this field.
+% 
+%    Therefore, the floating-point number is described by:
+% 
+%          (-1)**S * 2**(E-Bias) * 1.F
+% 
+%    It is declared as follows:
+% 
+%          double identifier;
+% 
+%          +------+------+------+------+------+------+------+------+
+%          |byte 0|byte 1|byte 2|byte 3|byte 4|byte 5|byte 6|byte 7|
+%          S|    E   |                    F                        |
+%          +------+------+------+------+------+------+------+------+
+%          1|<--11-->|<-----------------52 bits------------------->|
+%          <-----------------------64 bits------------------------->
+%                                         DOUBLE-PRECISION FLOATING-POINT
+% 
+%    Just as the most and least significant bytes of a number are 0 and 3,
+%    the most and least significant bits of a double-precision floating-
+%    point number are 0 and 63.  The beginning bit (and most significant
+%    bit) offsets of S, E, and F are 0, 1, and 12, respectively.  Note
+%    that these numbers refer to the mathematical positions of the bits,
+%    and NOT to their actual physical locations (which vary from medium to
+%    medium).
+
+%    The IEEE specifications should be consulted concerning the encoding
+%    for signed zero, signed infinity (overflow), and denormalized numbers
+%    (underflow) [IEEE].  According to IEEE specifications, the "NaN" (not
+%    a number) is system dependent and should not be interpreted within
+%    XDR as anything other than "NaN".

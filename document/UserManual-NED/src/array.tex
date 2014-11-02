@@ -1,0 +1,123 @@
+
+\chapter{آرایه}
+
+% Fixed-Length Array
+\section{آرایه با طول ثابت}
+
+%    Declarations for fixed-length arrays of homogeneous elements are in
+%    the following form:
+% 
+%          type-name identifier[n];
+% 
+%    Fixed-length arrays of elements numbered 0 through n-1 are encoded by
+%    individually encoding the elements of the array in their natural
+%    order, 0 through n-1.  Each element's size is a multiple of four
+%    bytes.  Though all elements are of the same type, the elements may
+%    have different sizes.  For example, in a fixed-length array of
+%    strings, all elements are of type "string", yet each element will
+%    vary in its length.
+% 
+%          +---+---+---+---+---+---+---+---+...+---+---+---+---+
+%          |   element 0   |   element 1   |...|  element n-1  |
+%          +---+---+---+---+---+---+---+---+...+---+---+---+---+
+%          |<--------------------n elements------------------->|
+% 
+%                                                FIXED-LENGTH ARRAY
+
+% Variable-Length Array
+\section{آرایه با طول متغیر}
+
+%    Counted arrays provide the ability to encode variable-length arrays
+%    of homogeneous elements.  The array is encoded as the element count n
+%    (an unsigned integer) followed by the encoding of each of the array's
+%    elements, starting with element 0 and progressing through element
+%    n-1.  The declaration for variable-length arrays follows this form:
+آرایه با طول متغیر امکان کدگزاری داده با طول متغیر را فراهم می‌کند.
+طول یک آرایه با استفاده از عدد صحیح بدون علامت نمایش داده می شود.
+طول آرایه همواره با یک عدد صحیح بدون علامت نمایش داده می‌شود از این رو تنها
+انواع داده بدون علامت و صحیح می‌تواند برای تعیین طول آرایه به کار رود.
+
+\begin{C++}
+type-name identifier<length-declaration>;
+\end{C++}
+
+انواع داده زیر می‌تواند به عنوان متغیر طول آرایه به کار گرفته شود:
+
+\begin{itemize}
+  \item \lr{unsigned byte}
+  \item \lr{unsigned short int}
+  \item \lr{unsigned int}
+  \item \lr{unsigned long int}
+\end{itemize}
+
+برای نمونه یک آرایه از بایت‌ها که حداکثر ۲۵۵ بایت را در خود جای می‌دهد به صورت
+زیر تعریف می‌شود:
+
+\begin{C++}
+byte data<unsigned byte length>;
+\end{C++}
+
+در کدگزاری یک آرایه با طول متغیر ابتدا طول آرایه کدگزاری می‌شود و در جریان بایتی
+نوشته می‌شود، پس از آن هر عنصر آرایه به ترتیب اندیس آن کدگزاری شده و در جریان
+بایتی نوشته می شود.
+شکل \ref{image/array/variable-length} روش کدگزاری آرایه با طول متغیر را نمایش
+داده است.
+
+%            0  1  2  3
+%          +--+--+--+--+--+--+--+--+--+--+--+--+...+--+--+--+--+
+%          |     n     | element 0 | element 1 |...|element n-1|
+%          +--+--+--+--+--+--+--+--+--+--+--+--+...+--+--+--+--+
+%          |<-4 bytes->|<--------------n elements------------->|
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{image/array/variable-length}
+\caption[کدگذاری یک آرایه با طول متغیر]{
+	کدگزاری یک آرایه با طول متغیر. متغیر طول آرایه در ابتدای جریان بایتی کدگزاری
+	می‌شود و بعد از آن عنصرها به ترتیب اندیس کدگزاری خواهند شد.
+}
+\label{image/array/variable-length}
+\end{figure}
+
+\begin{warning}
+استفاده از مقادیر غیر مجاز (بیش از گنجایش متغیر طول) و یا متغیرهای صحیح علامت
+دار به عنوان طول خطا به شمار می‌آید.
+\end{warning}
+
+
+% 4.11.  String
+\section{رشته}
+
+%    The standard defines a string of n (numbered 0 through n-1) ASCII
+%    bytes to be the number n encoded as an unsigned integer (as described
+%    above), and followed by the n bytes of the string.  Byte m of the
+%    string always precedes byte m+1 of the string, and byte 0 of the
+%    string always follows the string's length.  If n is not a multiple of
+%    four, then the n bytes are followed by enough (0 to 3) residual zero
+%    bytes, r, to make the total byte count a multiple of four.  Counted
+%    byte strings are declared as follows:
+% 
+%          string object<m>;
+%       or
+%          string object<>;
+% 
+%    The constant m denotes an upper bound of the number of bytes that a
+%    string may contain.  If m is not specified, as in the second
+%    declaration, it is assumed to be (2**32) - 1, the maximum length.
+%    The constant m would normally be found in a protocol specification.
+%    For example, a filing protocol may state that a file name can be no
+%    longer than 255 bytes, as follows:
+% 
+%          string filename<255>;
+% 
+%             0     1     2     3     4     5   ...
+%          +-----+-----+-----+-----+-----+-----+...+-----+-----+...+-----+
+%          |        length n       |byte0|byte1|...| n-1 |  0  |...|  0  |
+%          +-----+-----+-----+-----+-----+-----+...+-----+-----+...+-----+
+%          |<-------4 bytes------->|<------n bytes------>|<---r bytes--->|
+%                                  |<----n+r (where (n+r) mod 4 = 0)---->|
+%                                                                   STRING
+% 
+%    It is an error to encode a length greater than the maximum described
+%    in the specification.
+

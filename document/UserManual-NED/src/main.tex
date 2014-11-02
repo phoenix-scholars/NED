@@ -1,0 +1,187 @@
+\documentclass{../boostan/Boostan-UserManual}
+% \documentclass{Boostan-Book}
+% \documentclass{Boostan-Thesis}
+
+\title{سبز-۱}
+\subtitle{نمایش داده‌های خارجی}
+\type{}
+\author{مصطفی برمشوری، محمدهادی منصوری، قاسم خانزاده}
+\date{}
+\version{1.0}
+\project{سبز-۱}
+\SetWatermarkText{سبز-۱}
+
+
+\begin{document}
+\input{glossary}
+
+\maketitle
+\input{abstract}
+
+\pagenumbering{alph}
+\tableofcontents
+\listoffigures 
+\listoftables
+
+\pagenumbering{arabic}
+\input{introduction}
+\input{basics}
+\input{data-types}
+\input{array}
+\input{struct} 
+\input{discussion}
+\input{specification}
+\input{example}
+\input{security}
+
+\pagestyle{plain}
+\bibliographystyle{ieeetr-fa}
+\bibliography{bibtex}
+\printindex
+\printglossaries
+
+\end{document}
+.
+
+
+
+% 
+% 
+% 
+% 
+% 
+% 9.  IANA Considerations
+% 
+%    It is possible, if not likely, that new data types will be added to
+%    XDR in the future.  The process for adding new types is via a
+%    standards track RFC and not registration of new types with IANA.
+%    Standards track RFCs that update or replace this document should be
+%    documented as such in the RFC Editor's database of RFCs.
+% 
+% 10.  Trademarks and Owners
+% 
+%    SUN WORKSTATION  Sun Microsystems, Inc.
+%    VAX              Hewlett-Packard Company
+%    IBM-PC           International Business Machines Corporation
+%    Cray             Cray Inc.
+%    NFS              Sun Microsystems, Inc.
+%    Ethernet         Xerox Corporation.
+%    Motorola 68000   Motorola, Inc.
+%    IBM 370          International Business Machines Corporation
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% Eisler                      Standards Track                    [Page 23]
+% 
+% RFC 4506       XDR: External Data Representation Standard       May 2006
+% 
+% 
+% 11.  ANSI/IEEE Standard 754-1985
+% 
+%    The definition of NaNs, signed zero and infinity, and denormalized
+%    numbers from [IEEE] is reproduced here for convenience.  The
+%    definitions for quadruple-precision floating point numbers are
+%    analogs of those for single and double-precision floating point
+%    numbers and are defined in [IEEE].
+% 
+%    In the following, 'S' stands for the sign bit, 'E' for the exponent,
+%    and 'F' for the fractional part.  The symbol 'u' stands for an
+%    undefined bit (0 or 1).
+% 
+%    For single-precision floating point numbers:
+% 
+%     Type                  S (1 bit)   E (8 bits)    F (23 bits)
+%     ----                  ---------   ----------    -----------
+%     signalling NaN        u           255 (max)     .0uuuuu---u
+%                                                     (with at least
+%                                                      one 1 bit)
+%     quiet NaN             u           255 (max)     .1uuuuu---u
+% 
+%     negative infinity     1           255 (max)     .000000---0
+% 
+%     positive infinity     0           255 (max)     .000000---0
+% 
+%     negative zero         1           0             .000000---0
+% 
+%     positive zero         0           0             .000000---0
+% 
+%    For double-precision floating point numbers:
+% 
+%     Type                  S (1 bit)   E (11 bits)   F (52 bits)
+%     ----                  ---------   -----------   -----------
+%     signalling NaN        u           2047 (max)    .0uuuuu---u
+%                                                     (with at least
+%                                                      one 1 bit)
+%     quiet NaN             u           2047 (max)    .1uuuuu---u
+% 
+%     negative infinity     1           2047 (max)    .000000---0
+% 
+%     positive infinity     0           2047 (max)    .000000---0
+% 
+%     negative zero         1           0             .000000---0
+% 
+%     positive zero         0           0             .000000---0
+% 
+% 
+% 
+% 
+% 
+% 
+% Eisler                      Standards Track                    [Page 24]
+% 
+% RFC 4506       XDR: External Data Representation Standard       May 2006
+% 
+% 
+%    For quadruple-precision floating point numbers:
+% 
+%     Type                  S (1 bit)   E (15 bits)   F (112 bits)
+%     ----                  ---------   -----------   ------------
+%     signalling NaN        u           32767 (max)   .0uuuuu---u
+%                                                     (with at least
+%                                                      one 1 bit)
+%     quiet NaN             u           32767 (max)   .1uuuuu---u
+% 
+%     negative infinity     1           32767 (max)   .000000---0
+% 
+%     positive infinity     0           32767 (max)   .000000---0
+% 
+%     negative zero         1           0             .000000---0
+% 
+%     positive zero         0           0             .000000---0
+% 
+%    Subnormal numbers are represented as follows:
+% 
+%     Precision            Exponent       Value
+%     ---------            --------       -----
+%     Single               0              (-1)**S * 2**(-126) * 0.F
+% 
+%     Double               0              (-1)**S * 2**(-1022) * 0.F
+% 
+%     Quadruple            0              (-1)**S * 2**(-16382) * 0.F
+% 
+% 12.  Normative References
+% 
+%    [IEEE]  "IEEE Standard for Binary Floating-Point Arithmetic",
+%            ANSI/IEEE Standard 754-1985, Institute of Electrical and
+%            Electronics Engineers, August 1985.
+% 
+% 13.  Informative References
+% 
+%    [KERN]  Brian W. Kernighan & Dennis M. Ritchie, "The C Programming
+%            Language", Bell Laboratories, Murray Hill, New Jersey, 1978.
+% 
+%    [COHE]  Danny Cohen, "On Holy Wars and a Plea for Peace", IEEE
+%            Computer, October 1981.
+% 
+%    [COUR]  "Courier: The Remote Procedure Call Protocol", XEROX
+%            Corporation, XSIS 038112, December 1981.
+% 
+%    [SPAR]  "The SPARC Architecture Manual: Version 8", Prentice Hall,
+%            ISBN 0-13-825001-4.
+% 
+%    [HPRE]  "HP Precision Architecture Handbook", June 1987, 5954-9906.
+

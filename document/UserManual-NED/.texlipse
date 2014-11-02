@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Mon Sep 02 02:02:30 IRDT 2013
+markTmpDer=true
+builderNum=7
+outputDir=output/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=main.tex
+outputFile=SABZ-1.pdf
+langSpell=fa
+markDer=true
+srcDir=src/

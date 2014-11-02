@@ -1,0 +1,26 @@
+
+% 4.16.  Void
+\section{تهی}
+
+%    An XDR void is a 0-byte quantity.  Voids are useful for describing
+%    operations that take no data as input or no data as output.  They are
+%    also useful in unions, where some arms may contain data and others do
+%    not.  The declaration is simply as follows:
+
+تهی معادل با داده‌ای به طول صفر است. داده تهی برای توصیف عمل‌هایی که هیچ داده
+خروجی و یا ورودی ندارند پر کاربرد است.
+در برخی از موارد که قسمت‌هایی از ساختارهای داده‌ای باید خالی باشد، داده تهی
+کاربرد دارد.
+تعریف یک داده تهی به صورت زیر است:
+
+\begin{C++}
+void;
+\end{C++}
+
+% 
+%    Voids are illustrated as follows:
+% 
+%            ++
+%            ||                                                     VOID
+%            ++
+%          --><-- 0 bytes

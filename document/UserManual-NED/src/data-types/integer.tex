@@ -1,0 +1,44 @@
+
+
+
+% 4.1.  Integer
+\section{عدد صحیح}
+
+%    An XDR signed integer is a 32-bit datum that encodes an integer in
+%    the range [-2147483648,2147483647].  The integer is represented in
+%    two's complement notation.  The most and least significant bytes are
+%    0 and 3, respectively.  Integers are declared as follows:
+
+در استاندارد ند، عدد صیحیح علامت‌دار با استفاده از یک داده ۳۲ بیتی کد گذاری
+می‌شود که قادر است عددهای صحیح در بازه $[-2147483648,2147483647]$ را در خود جای
+دهد.
+عدد صحیح با استفاده از متمم دو نمایش داده می‌شود.
+پر ارزش‌ترین بایت بایت شماره ۳ و کم ‌ارزش‌ترین بایت بایت شماره صفر است.
+در شکل \ref{image/data-types/integer} ساختار کلی جریان داده برای کدگزاری یک عدد
+صحیح نمایش داده شده است.
+
+%          int identifier;
+% 
+%            (MSB)                   (LSB)
+%          +-------+-------+-------+-------+
+%          |byte 0 |byte 1 |byte 2 |byte 3 |                      INTEGER
+%          +-------+-------+-------+-------+
+%          <------------32 bits------------>
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{image/data-types/integer}
+\caption[کدگذاری یک داده صحیح]{
+	ساختار داده‌ای یک داده صحیح شامل ۴ بایت است که برای نمایش یک عدد صحیح ۳۲ بیتی
+	به کار گرفته می‌شود. در این ساختار بایت صفر کم ارزش‌ترین و بایت ۳ پر ارزش‌ترین
+	بایت است.
+}
+\label{image/data-types/integer}
+\end{figure}
+
+
+یک عدد صیحی به صورت زیر تعریف می‌شود:
+
+\begin{C++}
+int identifier;
+\end{C++}

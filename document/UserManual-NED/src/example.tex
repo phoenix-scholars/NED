@@ -1,0 +1,62 @@
+
+% 7.  An Example of an XDR Data Description
+\chapter{نمونه}
+
+% 
+%    Here is a short XDR data description of a thing called a "file",
+%    which might be used to transfer files from one machine to another.
+% 
+%          const MAXUSERNAME = 32;     /* max length of a user name */
+%          const MAXFILELEN = 65535;   /* max length of a file      */
+%          const MAXNAMELEN = 255;     /* max length of a file name */
+% 
+%          /*
+%           * Types of files:
+%           */
+%          enum filekind {
+%             TEXT = 0,       /* ascii data */
+%             DATA = 1,       /* raw data   */
+%             EXEC = 2        /* executable */
+%          };
+% 
+%          /*
+%           * File information, per kind of file:
+%           */
+%          union filetype switch (filekind kind) {
+%          case TEXT:
+%             void;                           /* no extra information */
+%          case DATA:
+%             string creator<MAXNAMELEN>;     /* data creator         */
+%          case EXEC:
+%             string interpretor<MAXNAMELEN>; /* program interpretor  */
+%          };
+% 
+%          /*
+%           * A complete file:
+%           */
+%          struct file {
+%             string filename<MAXNAMELEN>; /* name of file    */
+%             filetype type;               /* info about file */
+%             string owner<MAXUSERNAME>;   /* owner of file   */
+%             opaque data<MAXFILELEN>;     /* file data       */
+%          };
+% 
+%    Suppose now that there is a user named "john" who wants to store his
+%    lisp program "sillyprog" that contains just the data "(quit)".  His
+%    file would be encoded as follows:
+% 
+% 
+%        OFFSET  HEX BYTES       ASCII    COMMENTS
+%        ------  ---------       -----    --------
+%         0      00 00 00 09     ....     -- length of filename = 9
+%         4      73 69 6c 6c     sill     -- filename characters
+%         8      79 70 72 6f     ypro     -- ... and more characters ...
+%        12      67 00 00 00     g...     -- ... and 3 zero-bytes of fill
+%        16      00 00 00 02     ....     -- filekind is EXEC = 2
+%        20      00 00 00 04     ....     -- length of interpretor = 4
+%        24      6c 69 73 70     lisp     -- interpretor characters
+%        28      00 00 00 04     ....     -- length of owner = 4
+%        32      6a 6f 68 6e     john     -- owner characters
+%        36      00 00 00 06     ....     -- length of file data = 6
+%        40      28 71 75 69     (qui     -- file data bytes ...
+%        44      74 29 00 00     t)..     -- ... and 2 zero-bytes of fill
